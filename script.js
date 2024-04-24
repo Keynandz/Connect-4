@@ -93,11 +93,7 @@ function checkWin(row, col) {
 
 function resetGame() {
     board = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
-    if (currentPlayer === 1 ){
-        currentPlayer = 2;
-    } else {
-        currentPlayer = 1;
-    }
+    currentPlayer = 2;
     renderBoard();
 }
 
