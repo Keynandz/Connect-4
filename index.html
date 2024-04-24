@@ -3,130 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Connect 4</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
-    .board {
-        display: inline-block;
-        margin-top: 20px;
-        border-collapse: collapse;
-    }
-    .board td {
-        width: 50px;
-        height: 50px;
-        border: 1px solid #999;
-        background-color: #eee;
-    }
-    .board .player1 {
-        background-color: #ff0000;
-    }
-    .board .player2 {
-        background-color: #ffff00;
-    }
-</style>
+<title>Keynandz 4</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h1>Connect 4</h1>
-    <table class="board" cellspacing="0">
-        <!-- Generate the board dynamically using JavaScript -->
+    <h1>Keynandz 4</h1>
+    <div class="score">
+        <p>White Score : <span id="player1Score">0</span></p>
+        <p>Cyan Score : <span id="player2Score">0</span></p>
+    </div>
+    <table class="board">
     </table>
-    <script>
-        const rows = 6;
-        const cols = 7;
-        let currentPlayer = 1; // Player 1 starts
-        let board = [];
-
-        // Initialize the board
-        for (let i = 0; i < rows; i++) {
-            board.push(new Array(cols).fill(0));
-        }
-
-        // Function to render the board
-        function renderBoard() {
-            const table = document.querySelector('.board');
-            table.innerHTML = '';
-
-            for (let i = 0; i < rows; i++) {
-                const row = document.createElement('tr');
-                for (let j = 0; j < cols; j++) {
-                    const cell = document.createElement('td');
-                    cell.dataset.column = j;
-                    cell.dataset.row = i;
-                    if (board[i][j] === 1) {
-                        cell.classList.add('player1');
-                    } else if (board[i][j] === 2) {
-                        cell.classList.add('player2');
-                    }
-                    row.appendChild(cell);
-                }
-                table.appendChild(row);
-            }
-        }
-
-        // Function to handle player moves
-        function dropPiece(column) {
-            for (let i = rows - 1; i >= 0; i--) {
-                if (board[i][column] === 0) {
-                    board[i][column] = currentPlayer;
-                    renderBoard();
-                    if (checkWin(i, column)) {
-                        alert('Player ' + currentPlayer + ' wins!');
-                        resetGame();
-                        return;
-                    }
-                    currentPlayer = currentPlayer === 1 ? 2 : 1;
-                    return;
-                }
-            }
-        }
-
-        // Function to check for a win
-        function checkWin(row, col) {
-            const directions = [[1, 0], [0, 1], [1, 1], [1, -1]];
-            const player = board[row][col];
-
-            for (let [dx, dy] of directions) {
-                let count = 1;
-                for (let direction = -1; direction <= 1; direction += 2) {
-                    for (let step = 1; step < 4; step++) {
-                        const newRow = row + direction * step * dx;
-                        const newCol = col + direction * step * dy;
-                        if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && board[newRow][newCol] === player) {
-                            count++;
-                        } else {
-                            break;
-                        }
-                    }
-                }
-                if (count >= 4) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        // Function to reset the game
-        function resetGame() {
-            board = new Array(rows).fill(0).map(() => new Array(cols).fill(0));
-            currentPlayer = 1;
-            renderBoard();
-        }
-
-        // Event listener for clicking on a column to drop a piece
-        document.querySelector('.board').addEventListener('click', function(event) {
-            const column = event.target.dataset.column;
-            if (column !== undefined) {
-                dropPiece(parseInt(column));
-            }
-        });
-
-        // Render the initial board
-        renderBoard();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
