@@ -15,7 +15,7 @@ Keynandz 4 is a web-based implementation of the classic Connect 4 game. It is bu
 ## How to Play
 
 1. Open the `index.html` file in your web browser.
-2. Choose the number of players (1 player vs. computer or 2 players).
+2. Choose the colour of players (white vs cyan).
 3. Click on a column to drop your colored disc.
 4. The game continues until a player wins or the board is full (resulting in a draw).
 5. Enjoy the game and have fun!
